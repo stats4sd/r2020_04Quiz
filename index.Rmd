@@ -1,0 +1,68 @@
+---
+title: "Using RStudio / Importing data: Quiz & Exercises"
+output: 
+  learnr::tutorial:
+    progressive: true
+    allow_skip: true
+    df_print: paged
+runtime: shiny_prerendered
+description: >
+  Learn how to use RStudio and import data.
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Quiz
+
+*Question 1*
+
+```{r Q1, echo=FALSE}
+question("Which of these statements is true?",
+  answer("RStudio is useless without R",correct=TRUE),
+  answer("R is a powerful Interactive Development Environment", message="No, RStudio is the IDE"),
+  answer("Without RStudio, you cannot use R", message="R can work very well without RStudio. It's just not that user friendly"),
+  answer("You need to install RStudio first, then you can install R", message="No, you should start by installing R"), allow_retry = TRUE,random_answer_order = TRUE
+)
+```
+
+
+```{r echo=FALSE, out.width="100%", fig.align='left'}
+knitr::include_graphics("./images/Quiz1.PNG")
+```
+
+
+*Question 2*
+
+```{r Q2, echo=FALSE}
+question("The above R Markdown runs fine, but is missing the point of R Markdown. Why?",
+  answer("The comments should be part of the text outside the R chunks. That way, an R Markdown document can become a proper report",correct=TRUE),
+  answer("With R Markdown, all the libraries are already preloaded, so there's no need to have commands that load libraries!", message="No, you still need to load libraries in an R Markdown file"),
+  answer("R Markdown is made for writing R code. Ideally, we shouldn't have any text or comment in such document, so that it is reproducible", message="No, the advantage of R Markdown is that it is great for writing reproducible reports. So it should contain text"),
+  answer("The commands should all be included in the same R chunk, so that they can be run altogether. That's the beauty of R Markdown!", message="No, having all the commands inside one unique R chunk would be missing the point as well."), allow_retry = TRUE,random_answer_order = TRUE
+)
+```
+
+
+*Question 3*
+
+```{r Q3, echo=FALSE}
+question("What is important for your data if you want to import it into R? (select all that apply)",
+  answer("It should be made of one single rectangle of data",correct=TRUE),
+  answer("The column names should lie in one row only", correct=TRUE),
+  answer("There shouldn't be any gap between rows or columns, other than for missing values", correct=TRUE),
+  answer("All the columns should have the same length, and the same for the rows", correct=TRUE),
+  answer("It shouldn't contain any merged cells", correct=TRUE), allow_retry = TRUE,random_answer_order = TRUE
+)
+```
+
+
+
+
+## Exercises
+
+
+**Exercise 1. download the following csv and Markdown files**
+
