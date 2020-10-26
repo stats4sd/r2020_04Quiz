@@ -12,6 +12,7 @@ description: >
 
 ```{r setup, include=FALSE}
 library(learnr)
+library(dplyr)
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
@@ -29,15 +30,41 @@ question("Which of these statements is true?",
 ```
 
 
+
+
 ```{r echo=FALSE, out.width="100%", fig.align='left'}
-knitr::include_graphics("./images/Quiz1.PNG")
+knitr::include_graphics("./images/packageQuestion.jpg")
 ```
 
 
 *Question 2*
 
 ```{r Q2, echo=FALSE}
-question("The above R Markdown runs fine, but is missing the point of R Markdown. Why?",
+question("Why is R giving an error in the above screenshot?",
+  answer("The command for reading the data is missing",message="No, it is present at the top of the file: Pulse <- read.csv('Pulse.csv')"),
+  answer("The command library(ggplot2) is missing", message="It is missing, but we don't need it, since we are not plotting anything"),
+  answer("We did not specify the name of our summary statistic", message="It's good practice to name our summary statistics indeed, but ommiting the name is not an 'error'"),
+  answer("The column names are incorrect", message="No, the column names are correct"),
+  answer("Pipes don't work within R chunks", message="pipes work very well within R chunks"),
+  answer("The project file was not created", message="We can't tell from this screenshot whether a project file was created or not. We can say that it cannot be responsible for the error though."),
+  answer("The command library(dplyr) is missing", correct=TRUE),
+  answer("The symbol used for the pipe operator is wrong", message="%>% is the right symbol for the pipe operator"),
+  answer("We are using pipes, but the data argument of each function is missing", message="The pipe command is correct. With pipes, we ommit the data argument of the function"), allow_retry = TRUE,random_answer_order = TRUE
+)
+```
+
+
+
+
+```{r echo=FALSE, out.width="100%", fig.align='left'}
+knitr::include_graphics("./images/Quiz1.PNG")
+```
+
+
+*Question 3*
+
+```{r Q3, echo=FALSE}
+question("The above R Markdown file runs fine, but is missing the point of using R Markdown. Why?",
   answer("The comments should be part of the text outside the R chunks. That way, an R Markdown document can become a proper report",correct=TRUE),
   answer("With R Markdown, all the libraries are already preloaded, so there's no need to have commands that load libraries!", message="No, you still need to load libraries in an R Markdown file"),
   answer("R Markdown is made for writing R code. Ideally, we shouldn't have any text or comment in such document, so that it is reproducible", message="No, the advantage of R Markdown is that it is great for writing reproducible reports. So it should contain text"),
@@ -46,13 +73,13 @@ question("The above R Markdown runs fine, but is missing the point of R Markdown
 ```
 
 
-*Question 3*
+*Question 4*
 
-```{r Q3, echo=FALSE}
+```{r Q4, echo=FALSE}
 question("What is important for your data if you want to import it into R? (select all that apply)",
   answer("It should be made of one single rectangle of data",correct=TRUE),
   answer("The column names should lie in one row only", correct=TRUE),
-  answer("There shouldn't be any gap between rows or columns, other than for missing values", correct=TRUE),
+  answer("There shouldn't be any gap between rows or columns", correct=TRUE),
   answer("All the columns should have the same length, and the same for the rows", correct=TRUE),
   answer("It shouldn't contain any merged cells", correct=TRUE), allow_retry = TRUE,random_answer_order = TRUE
 )
@@ -64,5 +91,84 @@ question("What is important for your data if you want to import it into R? (sele
 ## Exercises
 
 
-**Exercise: Download and open the R Markdown version of each of the workbooks seen so far. Try to reproduce the results from these files**
+**Exercise 1: Now that you have imported the Happiness dataset into R – let’s do a quick exercise to recap what we learnt in Modules 1-3, but writing out the code entirely in RStudio instead of online.**
+
+1.	Find the 5 countries with the lowest ‘generosity scores’  
+2.	Produce a subset of countries which have below average scores for both GDP and generosity.  
+3.	Make a plot showing the relationship between generosity and GDP per capita  
+ 
+
+**Exercise 2: Download the file below that contains the imdb dataset and the solutions for the module 3 exercises. Save these in your project folder. Import the data using RStudio menu and go through the R Markdown file to reproduce the solution in your own machine**
+
+[Module-3-Data-and-Solutions.zip](https://github.com/stats4sd/r2020_04Quiz/raw/main/Module-3-Data-and-Solutions.zip)
+
+
+
+## Appendix: 'Happiness' dataset 
+
+The data used for the questions in this workbook comes from the World Happiness Report 2019. The World Happiness Report is an annual publication of the United Nations Sustainable Development Solutions Network. It aims at ranking 156 countries by level of global happiness of their population, by doing an annual survey on their citizens.
+
+In this dataset, the variables 'GDP per capita','Social support','Healthy life expectancy','Freedom to make life choices','Generosity' and 'Perceptions of corruption' are factors used to compute the Happiness Score ('Score').
+
+The methodology, as well as more information about this publication, can be found <a href="https://worldhappiness.report/ed/2019/" target="_blank">here </a>. 
+
+
+## Appendix: 'imdb' dataset
+
+For one exercise of this module, we are using a dataset called "imdb", which we constructed from the subsets of the Internet Movie Database made available for non-commercial purposes by the IMDb team:
+<a href="https://www.imdb.com/interfaces/" target="_blank">https://www.imdb.com/interfaces/</a>
+
+
+It contains the following information for all the entries having more than 500 votes, that are not of type "tvEpisodes" and for which information about year of release, running time and director(s) was available at the time of extraction (28/09/2020):  
+
+
+```{r, echo=FALSE,message=FALSE,warning=FALSE}
+library(knitr)
+data.frame(Column=c("title","type","year","length","numVotes","averageRating","director","birthYear","animation","action", "adventure", "comedy", "documentary", "fantasy", "romance", "sci_fi", "thriller"),
+           Description=c("popular title of the entry",
+                         "type of entry: movie, short, tvMiniSeries, tvMovie, tvSeries, tvShort, tvSpecial, video or videoGame",
+                         "year of release (for series, year of release of the first episode)",
+                         "duration in minutes",
+                         "number of votes for the entry",
+                         "IMDb's weighted average rating for the entry",
+                         "director of the entry (if multiple directors, the first one was picked)",
+                         "year of birth of the director",
+                        "the entry is of genre animation (TRUE/FALSE)",
+                        "the entry is of genre action (TRUE/FALSE)",
+                        "the entry is of genre adventure (TRUE/FALSE)",
+                        "the entry is of genre comedy (TRUE/FALSE)",
+                        "the entry is of genre documentary (TRUE/FALSE)",
+                        "the entry is of genre fantasy (TRUE/FALSE)",
+                        "the entry is of genre romance (TRUE/FALSE)",
+                        "the entry is of genre science fiction (TRUE/FALSE)",
+                        "the entry is of genre thriller (TRUE/FALSE)")) %>% kable()
+
+```
+
+
+
+
+## Appendix:  Useful reference links  
+
+RStudio website:<a href="https://rstudio.com/" target="_blank">https://rstudio.com/   </a> 
+
+R-project website:<a href="https://www.r-project.org/" target="_blank">https://www.r-project.org/   </a> 
+
+Andy Field's Getting started in R and RStudio:<a href="http://milton-the-cat.rocks/learnr/r/r_getting_started" target="_blank">http://milton-the-cat.rocks/learnr/r/r_getting_started   </a> 
+
+R Markdown documentation:<a href="https://rmarkdown.rstudio.com/lesson-1.html" target="_blank">https://rmarkdown.rstudio.com/lesson-1.html   </a> 
+
+RStudio CheatSheet:<a href="https://rstudio.com/wp-content/uploads/2016/01/rstudio-IDE-cheatsheet.pdf" target="_blank">https://rstudio.com/wp-content/uploads/2016/01/rstudio-IDE-cheatsheet.pdf   </a>
+
+R Markdown CheatSheet:<a href="https://rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf" target="_blank">https://rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf   </a>
+
+
+Illustrated presentation of 'tidy data': <a href="https://docs.google.com/presentation/d/1N7hKepabvl9OrHjvGJWPjUsfzVdB5xzV5AsFndgSwms/edit?usp=sharing" target="_blank">Make friends with tidy data </a> 
+
+Video explaining the command to import text files into R - DataCamp:<a href="https://www.youtube.com/watch?v=Yy-ismDUkkQ" target="_blank">https://www.youtube.com/watch?v=Yy-ismDUkkQ   </a> 
+
+Article on the RStudio support site showing how to import data from different files via the RStudio import menu:<a href="https://support.rstudio.com/hc/en-us/articles/218611977-Importing-Data-with-RStudio" target="_blank">Importing Data with RStudio</a> 
+
+RStudio documentation on connecting to databases using R  <a href="https://db.rstudio.com" target="_blank">https://db.rstudio.com </a>
+
 

@@ -1,0 +1,179 @@
+---
+output:
+  word_document: default
+  html_document: default
+---
+# Module 3 Solutions
+
+Make sure the dplyr and ggplot2 packages are installed and then loaded correctly!
+
+Hopefully you have saved the data and RMD file into the same folder, and created a project file for that folder. If so then the imdb dataset can be read in without modifying the code below.
+
+Since some of the outputs can be pretty long, I added the command slice(1:20) to each of the outputs that could be a bit too long. This command simply keeps the first 20 rows. 
+
+
+```{r}
+library(dplyr)
+library(ggplot2)
+imdb <- read.csv2("imdb.csv")
+```
+
+
+## Exercises  
+
+**Exercise 1. rank the directors from youngest to oldest**
+
+
+
+
+## Answer 1
+
+A simple answer without using pipe would be
+```{r}
+arrange(imdb, desc(birthYear)) %>%
+  slice(1:20)
+
+```
+It gives us duplicated rows though, as many directors have produced several entries. So a better answer would be to us the function `distinct()` after arrange. And even best, to add the argument .keep_all=TRUE to keep all the columns, and then to select only the relevant columns.
+
+```{r}
+imdb %>% 
+  arrange(desc(birthYear)) %>%
+    distinct(director, .keep_all = TRUE) %>%
+      select(director, birthYear) %>%
+        slice(1:20)
+
+```
+You were not expected to give this full answer though
+
+
+**Exercise 2. Identify and correct the four mistakes that I made in the command below, to obtain the median duration of all the movies released after the year 2000**
+
+
+imdb %>%
+  filter(imdb, type="movie" & year>2000) %>%
+   sumarize(medianDuration = median(length)
+
+## Answer 2
+
+1. either imdb should be removed from filter, or the first line should be deleted  
+2. the condition of the filter function needs a double equals  
+3. the function summarise was misspelled  
+4. the parenthesis of the function summarise was not closed  
+
+Here is the corrected command:
+
+```{r}
+imdb %>%
+  filter(type=="movie" & year>2000) %>%
+   summarise(medianDuration = median(length))
+
+
+```
+
+
+
+
+
+**Exercise 3. Which are the earliest released titles for each type of entry**
+
+## Answer 3
+
+
+Using pipes, we groupe the data by type and then apply filter()
+
+```{r}
+imdb %>% 
+  group_by(type) %>%
+    filter(year==min(year))
+
+
+```
+
+**Exercise 4. Produce a list of Thriller TV Series who received more than 10000, ordered from best to worst average ratings**
+
+## Answer 4
+
+We filter the data to only retrieve the TV Series of genre thrille having received more than 10000 votes. Then we order the rows using arrange().
+
+```{r}
+imdb %>%
+  filter(thriller==TRUE & type=="tvSeries" & numVotes>10000) %>%
+    arrange(desc(averageRating))  %>%
+      slice(1:20)
+```
+
+
+**Exercise 5. What are the minimum, average and maximum age of a movie director releasing a movie in the imdb dataset? (you will need to add `na.rm=T` in your summary functions to deal with the entries where the year of birth of the director is missing)**
+
+## Answer 5
+For this exercise, we need to create a new variable that is the age of the director at the time of release. We do that with mutate. We then filter the data to only keep the entries of type movie (we could have placed this step first though). The order did not matter here. Finally we use summarise to calculate the requested summary statistics. Since there are missing values in the column birthYear, there are also missing values in the new column age, and so we add the argument na.rm=TRUE to get rid of these missing values.
+
+
+```{r}
+
+imdb %>%
+  mutate(age=year-birthYear) %>%
+    filter(type=="movie") %>%
+      summarise(minAge=min(age, na.rm=TRUE), meanAge=mean(age, na.rm=TRUE), maxAge=max(age, na.rm=TRUE))
+
+```
+So there was a director who directed a movie at the age of 16, and one who directed a movie at age 104! Let's find who they are. To do so, I'm just copying the above command, but changing the summarise into a filter. I use the logical operator OR `|` to keep both, the director who directed a movie at the youngest and at the oldest age. At the end, I use select to only show the columns I'm interested in 
+```{r}
+
+imdb %>%
+  mutate(age=year-birthYear) %>%
+    filter(type=="movie") %>%
+      filter(age==min(age, na.rm=TRUE) | age==max(age, na.rm=TRUE))%>%
+        select(director, age, title, numVotes, year)
+
+```
+
+
+**Exercise 6. Generate a boxplot of average rating by type of entry having received more than 10000 votes**
+
+We filter our rows, and make our boxplot!
+```{r}
+
+imdb %>%
+  filter(numVotes>10000)%>%
+    ggplot(aes(x=type, y=averageRating))+
+      geom_boxplot()
+
+```
+
+
+
+**Exercise 7. In three parts: **
+
+1. **Find who is the worst director of romantic comedy movies, only counting directors who made at least 5 romantic comedies that received at least 5000 votes. **
+2. **Find the worst rated movie (of any genre) that this director has released.**
+3. **Watch this movie.**
+
+For the first part, we now that we will need to group our data by director. So I start with that. Then we only want to count romantic comedy movies that received at least 5000 votes, so we filter the data accordingly. Here,the order of the two first commands don't matter. Then I wan to keep only the directors who have made at least 5 of these movies. So I need to count the number of entries for each director, using summarise() and the function n(). Then I apply a filter to filter out the directors who directed less than 5 such movies. Finally I need to find the worst of these directors. Well assuming that worst mean that the mean of average rating is the worst, Ineed to calculate this average. We can add this calculation is the summarise command.
+Finally let's see who is the worst by applying a last filter to our data.
+```{r}
+
+imdb %>%
+  group_by(director) %>%
+    filter(romance==TRUE & comedy==TRUE & type=="movie" & numVotes>5000) %>%
+      summarize(n=n(), meanRating=mean(averageRating))%>%
+        filter(n>=5)%>%
+          filter(meanRating==min(meanRating))
+
+```
+
+For the second part of the question, we want to only look at the entries of type movies by this director. So we can use filter. Then we could use filter again to keep the movie with worst average, but I prefer using arrange here to get an idea of his other entries.
+
+```{r}
+imdb %>%
+  filter(director=="Tyler Perry" & type=="movie") %>%
+    arrange(averageRating) %>% 
+      slice(1:20)
+
+```
+
+For the third part, if you really wanted to answer this question, I've found a streaming link that may not be totally legal:
+https://ww2.123movieshub.dev/movies/show/31864/tyler-perrys-boo-2-a-madea-halloween-2017
+
+But if I was you, I would skip it. Remember, there is no grade at the end of the course.
