@@ -7,7 +7,7 @@ output:
     df_print: paged
 runtime: shiny_prerendered
 description: >
-  Learn how to use RStudio and import data.
+  Learn how to use RStudio and import data - Quiz/Exo.
 ---
 
 ```{r setup, include=FALSE}
@@ -64,5 +64,5 @@ question("What is important for your data if you want to import it into R? (sele
 ## Exercises
 
 
-**Exercise 1. download the following csv and Markdown files**
+**Exercise 1. download the following csv and Markdown file**
 
