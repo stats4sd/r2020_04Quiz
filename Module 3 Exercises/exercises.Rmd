@@ -1,0 +1,91 @@
+---
+title: "Manipulating Data using dplyr: Quiz & Exercises"
+---
+
+```{r setup, include=FALSE}
+library(dplyr)
+library(ggplot2)
+imdb <- read.csv("imdb.csv")
+```
+
+## Exercises
+
+
+### Exercise 1a
+
+I would like to see the data for the movie "Moneyball" - produce a filter of the data showing just this movie
+
+```{r ex3, exercise=TRUE}
+
+```
+
+### Exercise 1b. 
+
+That output has too many columns! I would still like to see the data on "Moneyball", but this time only showing the columns with the title, year of release, length of movie, number of votes, average rating and director
+
+```{r ex3b, exercise=TRUE}
+
+```
+
+### Exercise 2. 
+Find the earliest year of release for each of the different types of entry in the dataset
+
+```{r ex2,exercise=TRUE,error=TRUE}
+
+```
+
+
+### Exercise 3. 
+Identify and correct the four mistakes that I made in the command below, to obtain the median duration of all the movies released after the year 2000
+
+```{r ex1,exercise=TRUE,error=TRUE}
+imdb %>%
+  filter(imdb, type="movie" & year>2000) %>%
+   sumarize(medianDuration = median(length)
+```
+
+### Exercise 4. 
+
+Produce a list of titles which are shared across four or more different entries in the data. Order this list so that the most common title appears at the top
+
+```{r ex4,exercise=TRUE}
+
+```
+
+### Exercise 5. 
+
+What are the minimum, average and maximum age of a movie director releasing a movie in the imdb dataset? (you will need to add `na.rm=T` in your summary functions to deal with the entries where the year of birth of the director is missing)
+
+```{r ex5,exercise=TRUE}
+
+```
+
+### Exercise 6. 
+Generate a boxplot comparing the average ratings of the movies directed by Michael Bay those directed by Christopher Nolan
+
+```{r ex6,exercise=TRUE}
+
+```
+
+### Exercise 7.
+
+In three parts: 
+
+1. Find who is the worst director of romantic comedy movies (lowest average rating). Only counting directors who made at least 5 romantic comedies, that received at least 5000 votes. 
+2. Find the worst rated movie of any genre that this director has released.
+3. Watch this movie.
+
+Use the first box for 1. and the second box for 2. You don't need to try to pipe all of the way through - you can use your answer from part 1 within a new set of code for part 2
+
+Skip 3. if you find it too hard 
+
+*(Note/Hint: We usually run this course a couple of weeks earlier in the year when it would be a thematically relevant movie to watch, even if it is very poorly rated! But later in the year there is even less reason for you to watch this)*
+
+```{r ex7_1,exercise=TRUE}
+
+```
+
+```{r ex7_2,exercise=TRUE}
+
+```
+

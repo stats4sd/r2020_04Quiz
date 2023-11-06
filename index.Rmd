@@ -135,7 +135,7 @@ For one exercise of this module, we are using a dataset called "imdb", which we 
 <a href="https://www.imdb.com/interfaces/" target="_blank">https://www.imdb.com/interfaces/</a>
 
 
-It contains the following information for all the entries having more than 500 votes, that are not of type "tvEpisodes" and for which information about year of release, running time and director(s) was available at the time of extraction (28/09/2020):  
+It contains the following information for all the entries having more than 500 votes, that are not of type "tvEpisodes" and for which information about year of release, running time and director(s) was available at the time of extraction (01/11/2023):  
 
 
 ```{r, echo=FALSE,message=FALSE,warning=FALSE}
