@@ -95,7 +95,7 @@ question("What is important for your data if you want to import it into R? (sele
 
 0. Start a new project file, and a new RMD script file and write the initial set up code to import the happiness dataset and load the `dplyr` and `ggplot2` libraries. Remember to save the Excel file in CSV format before importing the data.
 (If you were following along to here directly from the workbook you may have already done this; so you can skip this step!).
-You can find the Excel file here: [Happiness.xlsx](https://github.com/stats4sd/r2020_04Importation/raw/main/Happiness.xlsx)
+You can find the Excel file here: [Happiness.xlsx](https://github.com/stats4sd/RCourse_2023_download_files/raw/dev/Happiness.xlsx)
 
 1.	Find the 5 countries with the lowest ‘generosity scores’  
 
@@ -106,7 +106,7 @@ You can find the Excel file here: [Happiness.xlsx](https://github.com/stats4sd/r
 
 **Exercise 2: Download the file below that contains the imdb dataset and the Module 3 exercises in RMD format.** 
 
-[Module-3-Exercises.zip](https://github.com/stats4sd/r2020_04Quiz/raw/main/Module%203%20Exercises.zip)
+[Module-3-Exercises.zip](https://github.com/stats4sd/RCourse_2023_download_files/raw/dev/Module%203%20Exercises.zip)
 
 Create a new project in RStudio and unzip the files into your new project folder. 
 
