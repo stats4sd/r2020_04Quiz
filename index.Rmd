@@ -61,7 +61,7 @@ knitr::include_graphics("./images/Quiz1.PNG")
 ```
 
 
-*Question 3*
+*Question 3
 
 ```{r Q3, echo=FALSE}
 question("The above R Markdown file runs fine, but is missing the point of using R Markdown. Why?",
@@ -116,10 +116,6 @@ Then you can copy across your answers from Module 3 (which should still be saved
 
 And, if you did finish the Module 3 exercises, now is the time to do so! Only now you are using your own version RStudio rather than using the version of R on the server.
 
-
-
-
-
 ## Appendix: 'Happiness' dataset 
 
 The data used for the questions in this workbook comes from the World Happiness Report 2019. The World Happiness Report is an annual publication of the United Nations Sustainable Development Solutions Network. It aims at ranking 156 countries by level of global happiness of their population, by doing an annual survey on their citizens.
@@ -135,7 +131,7 @@ For one exercise of this module, we are using a dataset called "imdb", which we 
 <a href="https://www.imdb.com/interfaces/" target="_blank">https://www.imdb.com/interfaces/</a>
 
 
-It contains the following information for all the entries having more than 500 votes, that are not of type "tvEpisodes" and for which information about year of release, running time and director(s) was available at the time of extraction (01/11/2023):  
+It contains the following information for all the entries having more than 500 votes, that are not of type "tvEpisodes" and for which information about year of release, running time and director(s) was available at the time of extraction (02/10/2024):  
 
 
 ```{r, echo=FALSE,message=FALSE,warning=FALSE}
